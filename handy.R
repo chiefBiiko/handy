@@ -1,0 +1,33 @@
+# handy stuff
+
+R.version  # Info on running R version
+rstudioapi::getVersion()  # Info on running RStudio version
+sessionInfo()  # Session info
+.packages(all.available=T)  # Have a look at all available packages
+ls(getNamespace('sys'), all.names=T)  # Have a look at all namespaces in a package
+readline('What\'s ur goal 4 today? ')  # Get user input from the console
+rstudioapi::askForPassword('What\'s the secret?')  # Ask with a popup in RStudio
+rstudioapi::sendToConsole('419 * 2', execute=F)  # Send code to the RStudio console
+args(readline)  # Get the argument list of a function
+
+gothub <- function(remote, flname=sub('^.*/([^/]*)$', '\\1', remote), open=T) {
+  # Download and open a .R or .Rmd file from a Github repo with 1 R function call!
+  # Let below be all valid inputs [@param remote]
+  #   https://github.com/chiefBiiko/rockets/blob/master/server.R
+  #   https://raw.githubusercontent.com/chiefBiiko/rockets/master/server.R
+  #   https://github.com/chiefBiiko/rockets/raw/master/server.R
+  # @param {character} remote URI in 1 of the formats above
+  # @param {character} flname Destination file name, is destfile 4 base::download.file()
+  # @param {bool} open Should the file be opened in an editor window
+  # @return {character} Name of downloaded file
+  stopifnot(!missing(remote), is.character(remote), grepl('^https', remote))
+  if (grepl('raw.+\\.r(md)?$', remote, ignore.case=T)) {
+    uri <- remote
+  } else if (grepl('blob.+\\.r(md)?$', remote, ignore.case=T)) {
+    uri <- sub('blob', 'raw', remote)
+  } else { stop('Can\'t handle remote uri, sorry!') }
+  dlcd <- download.file(uri, flname)
+  if (dlcd != 0) stop('Download error.')
+  if (open == T) file.edit(flname)
+  return(flname)
+}
