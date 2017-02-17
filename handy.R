@@ -6,7 +6,8 @@ sessionInfo()  # Session info
 .packages(all.available=T)  # Have a look at all available packages
 .libPaths()  # Get the paths 2 R modules and packages
 ls(getNamespace('sys'), all.names=T)  # Have a look at all namespaces in a package
-ls()  # Get all namespaces in a specified environment
+ls()  # Get all namespaces in the current environment
+ls(envir=globalenv())  # Get all namespaces in a specified environment
 rm(list=ls())  # Clear all namespaces in the current environment
 readline('What\'s ur goal 4 today? ')  # Get user input from the console
 rstudioapi::askForPassword('What\'s the secret?')  # Ask with a popup in RStudio
