@@ -13,9 +13,41 @@ readline('What\'s ur goal 4 today? ')  # Get user input from the console
 rstudioapi::askForPassword('What\'s the secret?')  # Ask with a popup in RStudio
 rstudioapi::sendToConsole('419 * 2', execute=F)  # Send code to the RStudio console
 args(readline)  # Get the argument list of a function
+formals(readline)  # same thing just ugly
+body(source)  # Have a look at a function's body
+environment(source)  # Get the parent environment of a function
+x %*% y  # matrix multiplication
+'%+%' <- function(a, b) UseMethod('%+%')  # generic concat operator
+'%+%.character' <- function(a, b) paste0(a, b, sep='')  # string concat operator
+ifelse(0 == 1, T, F)  # vectorized ternary operator
+# C-stylish ternary operator: (conditon) %?% T %:% F
+'%?%' <- function(x, y) list(x=x, y=y)
+'%:%' <- function(xy, z) if(xy$x) xy$y else z
+
+# Destructuring, unpacking: g(a, b, c) %=% c(77, 99, 36)
+'%=%' <- function(l, r) UseMethod('%=%')  # generic form
+g = function(...) {  # destructuring helper
+  # Groups the left hand side and returns a custom class.
+  bunch = as.list(substitute(list(...)))
+  class(bunch) <- 'lbunch'
+  return(bunch)
+}
+'%=%.lbunch' <- function(l, r) {  # destructuring operator
+  # Destructures items of the right operand with the namespaces provided on the left.
+  stopifnot(length(l) > 1)
+  if (length(r) > length(l) - 1) {
+    warning('Right has more args than left. Only first ', length(l) - 1, ' used.')
+  } else if (length(l) - 1 > length(r)) {
+    warning('Left has more args than right. Right will be repeated.')
+    r <- rep(r, ceiling((length(l) - 1) / length(r)))[1:(length(l) - 1)]
+  }
+  for (item in 2:length(l)) {  # g() value is first, counts as 1 length, ignoring it
+    assign(as.character(l[[item]]), as.list(r)[[item - 1]], pos=1L)
+  }
+}
 
 inBando <- function(dir=NULL) {
-  # Checks whether u r in the specified working directory
+  # Checks whether u r in the specified working directory.
   # @param {character} dir Name of directory to be checked 4
   # @return {bool} Do input and cwd match?
   if (missing(dir)) stop('no input!')
