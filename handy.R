@@ -1,6 +1,7 @@
 # handy stuff
 
 R.version  # Info on running R version
+getRversion()  # version info only
 rstudioapi::getVersion()  # Info on running RStudio version
 sessionInfo()  # Session info
 .packages(all.available=T)  # Have a look at all available packages
@@ -19,10 +20,12 @@ environment(source)  # Get the parent environment of a function
 x %*% y  # matrix multiplication
 '%+%' <- function(a, b) UseMethod('%+%')  # generic concat operator
 '%+%.character' <- function(a, b) paste0(a, b, sep='')  # string concat operator
+'sakawa' %+% ' spirit'
 ifelse(0 == 1, T, F)  # vectorized ternary operator
 # C-stylish ternary operator: (conditon) %?% T %:% F
 '%?%' <- function(x, y) list(x=x, y=y)
 '%:%' <- function(xy, z) if(xy$x) xy$y else z
+(exists('x')) %?% 'Found x.' %:% 'Didn\'t find x.'
 
 # Destructuring, unpacking: g(a, b, c) %=% c(77, 99, 36)
 '%=%' <- function(l, r) UseMethod('%=%')  # generic form
