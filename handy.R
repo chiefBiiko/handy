@@ -1,7 +1,7 @@
 # handy stuff
 
 R.version  # Info on running R version
-getRversion()  # version info only
+getRversion()  # Version info only
 rstudioapi::getVersion()  # Info on running RStudio version
 sessionInfo()  # Session info
 .packages(all.available=T)  # Have a look at all available packages
@@ -10,32 +10,32 @@ ls(getNamespace('sys'), all.names=T)  # Have a look at all namespaces in a packa
 ls()  # Get all namespaces in the current environment
 ls(envir=globalenv())  # Get all namespaces in a specified environment
 rm(list=ls())  # Clear all namespaces in the current environment
-readline('What\'s ur goal 4 today? ')  # Get user input from the console
-rstudioapi::askForPassword('What\'s the secret?')  # Ask with a popup in RStudio
-rstudioapi::sendToConsole('419 * 2', execute=F)  # Send code to the RStudio console
 args(readline)  # Get the argument list of a function
 formals(readline)  # same thing just ugly
 body(source)  # Have a look at a function's body
 environment(source)  # Get the parent environment of a function
-x %*% y  # matrix multiplication
-'%+%' <- function(a, b) UseMethod('%+%')  # generic concat operator
-'%+%.character' <- function(a, b) paste0(a, b, sep='')  # string concat operator
+readline('What\'s ur goal 4 today? ')  # Get user input from the console
+rstudioapi::askForPassword('What\'s the secret?')  # Ask with a popup in RStudio
+rstudioapi::sendToConsole('419 * 2', execute=F)  # Send code to the RStudio console
+
+10 %% 7  # Modulo
+10 %/% 7  # Integer division
+x %*% y  # Matrix multiplication
+
+'%+%' <- function(a, b) UseMethod('%+%')  # Generic concat operator
+'%+%.character' <- function(a, b) paste0(a, b, sep='')  # String concat operator
 'sakawa' %+% ' spirit'
-ifelse(0 == 1, T, F)  # vectorized ternary operator
+ifelse(x >= 0, x, NA)  # Vectorized ternary operator
+
 # C-stylish ternary operator: (conditon) %?% T %:% F
 '%?%' <- function(x, y) list(x=x, y=y)
 '%:%' <- function(xy, z) if(xy$x) xy$y else z
 (exists('x')) %?% 'Found x.' %:% 'Didn\'t find x.'
 
-# Destructuring, unpacking: g(a, b, c) %=% c(77, 99, 36)
-'%=%' <- function(l, r) UseMethod('%=%')  # generic form
-g = function(...) {  # destructuring helper
-  # Groups the left hand side and returns a custom class.
-  bunch = as.list(substitute(list(...)))
-  class(bunch) <- 'lbunch'
-  return(bunch)
-}
-'%=%.lbunch' <- function(l, r) {  # destructuring operator
+# Destructuring, unpacking magic: g(a, b, c) %=% c(77, 99, 36)
+'%=%' <- function(l, r) UseMethod('%=%')  # Generic form
+g <- function(...) structure(as.list(substitute(list(...))), class='lbunch')  # Grouper
+'%=%.lbunch' <- function(l, r) {  # Destructuring operator
   # Destructures items of the right operand with the namespaces provided on the left.
   stopifnot(length(l) > 1)
   if (length(r) > length(l) - 1) {
