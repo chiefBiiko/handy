@@ -4,6 +4,7 @@ R.version  # Info on running R version
 getRversion()  # Version info only
 rstudioapi::getVersion()  # Info on running RStudio version
 sessionInfo()  # Session info
+options()  # Get a named list of several global options
 .packages(all.available=T)  # Have a look at all available packages
 .libPaths()  # Get the paths 2 R modules and packages
 ls(getNamespace('sys'), all.names=T)  # Have a look at all namespaces in a package
@@ -22,19 +23,16 @@ rstudioapi::sendToConsole('419 * 2', execute=F)  # Send code to the RStudio cons
 10 %/% 7  # Integer division
 x %*% y  # Matrix multiplication
 
+y <- ifelse(x >= 0, 1L, -1L)  # Vectorized ternary operator
+
+# Easy string concatenation
 '%+%' <- function(a, b) UseMethod('%+%')  # Generic concat operator
 '%+%.character' <- function(a, b) paste0(a, b, sep='')  # String concat operator
-'sakawa' %+% ' spirit'
-ifelse(x >= 0, x, NA)  # Vectorized ternary operator
-
-# C-stylish ternary operator: (conditon) %?% T %:% F
-'%?%' <- function(x, y) list(x=x, y=y)
-'%:%' <- function(xy, z) if(xy$x) xy$y else z
-(exists('x')) %?% 'Found x.' %:% 'Didn\'t find x.'
+'sakawa' %+% ' spirit' %+% ' gives strength'
 
 # Destructuring, unpacking magic: g(a, b, c) %=% c(77, 99, 36)
 '%=%' <- function(l, r) UseMethod('%=%')  # Generic form
-g <- function(...) structure(as.list(substitute(list(...))), class='lbunch')  # Grouper
+g <- function(...) structure(as.list(substitute(list(...))), class='lbunch')  # Caster
 '%=%.lbunch' <- function(l, r) {  # Destructuring operator
   # Destructures items of the right operand with the namespaces provided on the left.
   stopifnot(length(l) > 1)
@@ -49,12 +47,12 @@ g <- function(...) structure(as.list(substitute(list(...))), class='lbunch')  # 
   }
 }
 
-inBando <- function(dir=NULL) {
+inBando <- function(bando=NULL) {
   # Checks whether u r in the specified working directory.
-  # @param {character} dir Name of directory to be checked 4
+  # @param {character} bando Name of directory to be checked 4
   # @return {bool} Do input and cwd match?
-  if (missing(dir)) stop('no input!')
-  return(grepl(paste0(dir, '$'), getwd(), ignore.case=T))
+  if (missing(bando) || bando == '') stop('No input!')
+  return(grepl(paste0(bando, '$'), getwd(), ignore.case=T))
 }
 
 gothub <- function(remote, flname=sub('^.*/([^/]*)$', '\\1', remote), open=T) {
