@@ -27,7 +27,7 @@ y <- ifelse(x >= 0, 1L, -1L)  # Vectorized ternary operator
 
 # Easy string concatenation
 '%+%' <- function(a, b) UseMethod('%+%')  # Generic concat operator
-'%+%.character' <- function(a, b) paste0(a, b, sep='')  # String concat operator
+'%+%.character' <- function(a, b) paste0(a, b)  # String concat operator
 'sakawa' %+% ' spirit' %+% ' gives strength'
 
 # Destructuring, unpacking magic: g(a, b, c) %=% c(77, 99, 36)
