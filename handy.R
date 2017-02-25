@@ -23,12 +23,27 @@ rstudioapi::sendToConsole('419 * 2', execute=F)  # Send code to the RStudio cons
 10 %/% 7  # Integer division
 x %*% y  # Matrix multiplication
 
-y <- ifelse(x >= 0, 1L, -1L)  # Vectorized ternary operator
-
 # Easy string concatenation
 '%+%' <- function(a, b) UseMethod('%+%')  # Generic concat operator
 '%+%.character' <- function(a, b) paste0(a, b)  # String concat operator
 'sakawa' %+% ' spirit' %+% ' gives strength'
+
+'%?%' <- function(a, b) {
+  # Ternary operator 4 R ... !!!
+  # @param {bool} a Expression that evaluates 2 a logical
+  # @param {character} b Vector of length 2; if a is T, 1st item is evaluated,
+  #                      otherwise the 2nd
+  # @examples
+  #   (0 > 1) %?% c('x <- TRUE', 'x <- FALSE')
+  #   (100**3 == 1e6) %?% c('{x <- T; y <- "cool"; z <- "****"}', 'x <- F')
+  #   {p <- 15; p < 17.5} %?% c('message("proceeding")', 'warning("2 high")')
+  stopifnot(is.logical(a), is.character(b), length(b) == 2)
+  if (a) {
+    eval(parse(text=b[1]), parent.frame(1))
+  } else if (!a) {
+    eval(parse(text=b[2]), parent.frame(1))
+  }
+}
 
 # Destructuring, unpacking magic: g(a, b, c) %=% c(77, 99, 36)
 '%=%' <- function(l, r) UseMethod('%=%')  # Generic form
