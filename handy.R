@@ -26,7 +26,7 @@
 # Easy string concatenation
 '%+%' <- function(a, b) UseMethod('%+%')  # Generic concat operator
 '%+%.character' <- function(a, b) paste0(a, b)  # String concat operator
-'sakawa' %+% ' spirit' %+% ' gives strength'  # 419
+# 'sakawa' %+% ' spirit' %+% ' gives strength'  # 419
 
 '%?%' <- function(a, b) {
   # Ternary operator 4 R ... !!!
@@ -63,10 +63,11 @@ g <- function(...) structure(as.list(substitute(list(...))), class='lbunch')  # 
 }
 
 # Yolo lambdas
-g(foo, bar) %=% c(2, 3)  # unpacking magic
-foo %>% {foo * 7}  # single argument, single statement
-c(foo, bar) %>% {foo + bar}  # multi arguments, single statement
-c(foo, bar) %>% {x <- foo + bar; x * x}  # multi arguments, multi statements
+# g(foo, bar) %=% c(2, 3)  # unpacking magic
+# library(magrittr)
+# foo %>% {foo * 7}  # single argument, single statement
+# c(foo, bar) %>% {foo + bar}  # multi arguments, single statement
+# c(foo, bar) %>% {x <- foo + bar; x * x}  # multi arguments, multi statements
 
 inBando <- function(bando=NULL) {
   # Checks whether u r in the specified working directory.
