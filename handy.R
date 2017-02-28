@@ -28,6 +28,23 @@
 '%+%.character' <- function(a, b) paste0(a, b)  # String concat operator
 # 'sakawa' %+% ' spirit' %+% ' gives strength'  # 419
 
+'%i%' <- function(a, b) UseMethod('%i%')
+'%i%.character' <- function(a, b) {
+  # Easy string subsetting.
+  # @param {character} a String vector of length 1
+  # @param {numeric} b Numeric vector with indices 4 subsetting
+  # @return {character} Character subset as 1 string
+  # @example
+  #   > 'Fraudulent Activities' %i% 1:5
+  #   [1] "Fraud"
+  #   > y <- 'Get rid of dumb characters' %i% -c(12:16)
+  stopifnot(length(a) == 1, nchar(a) > 0, is.numeric(b))
+  arr <- unlist(strsplit(a, ''))
+  x <- arr[b]
+  if (anyNA(x)) x <- x[!is.na(x)]
+  return(paste0(x, collapse=''))
+}
+
 # Destructuring, unpacking magic: g(a, b, c) %=% c(77, 99, 36)
 '%=%' <- function(l, r) UseMethod('%=%')  # Generic form
 g <- function(...) structure(as.list(substitute(list(...))), class='lbunch')  # Caster
