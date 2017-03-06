@@ -28,6 +28,12 @@
 '%+%.character' <- function(a, b) paste0(a, b)  # String concat operator
 # 'sakawa' %+% ' spirit' %+% ' gives strength'  # 419
 
+'%r%' <- function(a, b) UseMethod('%r%')  # Generic repeat operator
+'%r%.character' <- function(a, b) {  # String repeat operator
+  stopifnot(length(a) == 1, length(b) == 1)
+  return(paste0(rep(a, b), collapse=''))
+}
+
 '%i%' <- function(a, b) UseMethod('%i%')
 '%i%.character' <- function(a, b) {
   # Easy string subsetting.
@@ -73,7 +79,7 @@ inBando <- function(bando=NULL) {
   # Checks whether u r in the specified working directory.
   # @param {character} bando Name of directory to be checked 4
   # @return {bool} Do input and cwd match?
-  if (missing(bando) || bando == '') stop('No input!')
+  stopifnot(!missing(bando), is.character(bando), bando != '')
   return(grepl(paste0(bando, '$'), getwd(), ignore.case=T))
 }
 
