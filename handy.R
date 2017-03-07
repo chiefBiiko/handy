@@ -38,7 +38,7 @@
 '%i%.character' <- function(a, b) {
   # Easy string subsetting.
   # @param {character} a String vector of length 1
-  # @param {numeric} b Numeric vector with indices 4 subsetting
+  # @param {integer} b Integer vector with indices 4 subsetting
   # @return {character} Character subset as 1 string
   # @example
   #   > 'Fraudulent Activities' %i% 1:5
