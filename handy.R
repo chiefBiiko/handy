@@ -15,6 +15,7 @@
 # formals(readline)  # same thing just ugly
 # body(source)  # Have a look at a function's body
 # environment(source)  # Get the parent environment of a function
+# readLines(con)  # read lines of text from a connection
 # readline('What\'s ur goal 4 today? ')  # Get user input from the console
 # rstudioapi::askForPassword('What\'s the secret?')  # Ask with a popup in RStudio
 # rstudioapi::sendToConsole('419 * 2', execute=F)  # Send code to the RStudio console
