@@ -11,6 +11,8 @@
 # ls()  # Get all namespaces in the current environment
 # ls(envir=globalenv())  # Get all namespaces in a specified environment
 # rm(list=ls())  # Clear all namespaces in the current environment
+# dirname(list.files()[1])  # Get pre the last path separator
+# basename(getwd())  # Get past the last path separator
 # args(readline)  # Get the argument list of a function
 # formals(readline)  # same thing just ugly
 # body(source)  # Have a look at a function's body
