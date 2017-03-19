@@ -24,13 +24,12 @@
 # cat('hello moon\n', file='moon.txt')  # Write to a file
 # cat('hello dolphins\n', file='moon.txt', append=T)  # Append to a file
 # file.edit('moon.txt')  # Open a file in an editor window
-# dir.create('moon')
-# dir.exists('moon')
-# file.copy('moon.txt','moon/moon.txt')
-# file.exists('moon/moon.txt')
-# file.remove('moon/moon.txt')  # Delete a file
-# ? Removing a directory ?
-# file.remove('moon.txt')
+# dir.create('moon')  # Create a directory
+# file.copy('moon.txt','moon/moon.txt')  # Copy a file
+# file.exists('moon/moon.txt')  # Check if a file exists
+# file.remove(c('moon.txt', 'moon/moon.txt'))  # Delete files
+# unlink('moon', recursive=T)  # Delete a directory
+# dir.exists('moon')  # Check if a directory exists
 
 # 10 %% 7  # Modulo
 # 10 %/% 7  # Integer division
