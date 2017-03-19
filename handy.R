@@ -24,7 +24,13 @@
 # cat('hello moon\n', file='moon.txt')  # Write to a file
 # cat('hello dolphins\n', file='moon.txt', append=T)  # Append to a file
 # file.edit('moon.txt')  # Open a file in an editor window
-# file.remove('moon.txt')  # Delete a file
+# dir.create('moon')
+# dir.exists('moon')
+# file.copy('moon.txt','moon/moon.txt')
+# file.exists('moon/moon.txt')
+# file.remove('moon/moon.txt')  # Delete a file
+# ? Removing a directory ?
+# file.remove('moon.txt')
 
 # 10 %% 7  # Modulo
 # 10 %/% 7  # Integer division
