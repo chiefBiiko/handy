@@ -21,6 +21,10 @@
 # readline('What\'s ur goal 4 today? ')  # Get user input from the console
 # rstudioapi::askForPassword('What\'s the secret?')  # Ask with a popup in RStudio
 # rstudioapi::sendToConsole('419 * 2', execute=F)  # Send code to the RStudio console
+# cat('hello moon\n', file='moon.txt')  # Write to a file
+# cat('hello dolphins\n', file='moon.txt', append=T)  # Append to a file
+# file.edit('moon.txt')  # Open a file in an editor window
+# file.remove('moon.txt')  # Delete a file
 
 # 10 %% 7  # Modulo
 # 10 %/% 7  # Integer division
