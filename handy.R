@@ -31,9 +31,13 @@
 # unlink('moon', recursive=T)  # Delete a directory
 # dir.exists('moon')  # Check if a directory exists
 
-# 10 %% 7  # Modulo
-# 10 %/% 7  # Integer division
-# x %*% y  # Matrix multiplication
+inBando <- function(bando=NULL) {
+  # Checks whether u r in the specified working directory.
+  # @param {character} bando Name of directory to be checked 4
+  # @return {bool} Do input and cwd match?
+  stopifnot(!missing(bando), is.character(bando), bando != '')
+  return(grepl(paste0(bando, '$'), getwd(), ignore.case=T))
+}
 
 # Destructuring, unpacking magic: g(a, b, c) %=% c(77, 99, 36)
 '%=%' <- function(l, r) UseMethod('%=%')  # Generic form
@@ -50,21 +54,6 @@ g <- function(...) structure(as.list(substitute(list(...))), class='lbunch')  # 
   for (item in 2:length(l)) {  # g() value is first, counts as 1 length, ignoring it
     assign(as.character(l[[item]]), as.list(r)[[item - 1]], pos=1L)
   }
-}
-
-# Yolo lambdas
-# g(foo, bar) %=% c(2, 3)  # unpacking magic
-# library(magrittr)
-# foo %>% {foo * 7}  # single argument, single statement
-# c(foo, bar) %>% {foo + bar}  # multi arguments, single statement
-# c(foo, bar) %>% {x <- foo + bar; x * x}  # multi arguments, multi statements
-
-inBando <- function(bando=NULL) {
-  # Checks whether u r in the specified working directory.
-  # @param {character} bando Name of directory to be checked 4
-  # @return {bool} Do input and cwd match?
-  stopifnot(!missing(bando), is.character(bando), bando != '')
-  return(grepl(paste0(bando, '$'), getwd(), ignore.case=T))
 }
 
 gothub <- function(remote, flname=sub('^.*/([^/]*)$', '\\1', remote), open=T) {
@@ -88,3 +77,14 @@ gothub <- function(remote, flname=sub('^.*/([^/]*)$', '\\1', remote), open=T) {
   if (open == T) file.edit(flname)
   return(flname)
 }
+
+# Yolo lambdas
+# g(foo, bar) %=% c(2, 3)  # unpacking magic
+# library(magrittr)
+# foo %>% {foo * 7}  # single argument, single statement
+# c(foo, bar) %>% {foo + bar}  # multi arguments, single statement
+# c(foo, bar) %>% {x <- foo + bar; x * x}  # multi arguments, multi statements
+
+# 10 %% 7  # Modulo
+# 10 %/% 7  # Integer division
+# x %*% y  # Matrix multiplication
