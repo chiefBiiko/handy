@@ -5,6 +5,8 @@
 # rstudioapi::getVersion()  # Info on running RStudio version
 # sessionInfo()  # Session info
 # options()  # Get a named list of several global options
+# getOption('stringsAsFactors')  # Get the value of a specific global option
+# options(stringsAsFactors=F)  # Set the value of a global option
 # .packages(all.available=T)  # Have a look at all available packages
 # .libPaths()  # Get the paths 2 R modules and packages
 # ls(getNamespace('sys'), all.names=T)  # Have a look at all namespaces in a package
@@ -18,7 +20,7 @@
 # body(source)  # Have a look at a function's body
 # environment(source)  # Get the parent environment of a function
 # readLines(con)  # read lines of text from a connection
-# readline('What\'s ur goal 4 today? ')  # Get user input from the console
+# readline('Continue? [y/n]')  # Get user input from the console
 # rstudioapi::askForPassword('What\'s the secret?')  # Ask with a popup in RStudio
 # rstudioapi::sendToConsole('419 * 2', execute=F)  # Send code to the RStudio console
 # cat('hello moon\n', file='moon.txt')  # Write to a file
