@@ -5,24 +5,31 @@
 # rstudioapi::getVersion()  # Info on running RStudio version
 # sessionInfo()  # Session info
 # options()  # Get a named list of several global options
+
 # getOption('stringsAsFactors')  # Get the value of a specific global option
 # options(stringsAsFactors=F)  # Set the value of a global option
-# .packages(all.available=T)  # Have a look at all available packages
+
 # .libPaths()  # Get the paths 2 R modules and packages
+# .packages(all.available=T)  # Have a look at all available packages
 # ls(getNamespace('sys'), all.names=T)  # Have a look at all namespaces in a package
+
 # ls()  # Get all namespaces in the current environment
 # ls(envir=globalenv())  # Get all namespaces in a specified environment
 # rm(list=ls())  # Clear all namespaces in the current environment
-# dirname(list.files()[1])  # Get pre the last path separator
-# basename(getwd())  # Get past the last path separator
+
 # args(readline)  # Get the argument list of a function
 # formals(readline)  # same thing just ugly
 # body(source)  # Have a look at a function's body
 # environment(source)  # Get the parent environment of a function
-# readLines(con)  # read lines of text from a connection
+
+# readLines(con)  # Read lines of text from a connection
 # readline('Continue? [y/n]')  # Get user input from the console
 # rstudioapi::askForPassword('What\'s the secret?')  # Ask with a popup in RStudio
 # rstudioapi::sendToConsole('419 * 2', execute=F)  # Send code to the RStudio console
+
+# dirname(list.files()[1])  # Get pre the last path separator
+# basename(getwd())  # Get past the last path separator
+
 # cat('hello moon\n', file='moon.txt')  # Write to a file
 # cat('hello dolphins\n', file='moon.txt', append=T)  # Append to a file
 # file.edit('moon.txt')  # Open a file in an editor window
