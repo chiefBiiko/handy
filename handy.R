@@ -4,15 +4,15 @@
 # getRversion()  # Version info only
 # rstudioapi::getVersion()  # Info on running RStudio version
 # sessionInfo()  # Session info
-# options()  # Get a named list of several global options
 
+# options()  # Get a named list of several global options
 # getOption('stringsAsFactors')  # Get the value of a specific global option
 # options(stringsAsFactors=F)  # Set the value of a global option
 
 # .libPaths()  # Get the paths 2 R modules and packages
 # .packages(all.available=T)  # Have a look at all available packages
-# ls(getNamespace('sys'), all.names=T)  # Have a look at all namespaces in a package
 
+# ls(getNamespace('sys'), all.names=T)  # Have a look at all namespaces in a package
 # ls()  # Get all namespaces in the current environment
 # ls(envir=globalenv())  # Get all namespaces in a specified environment
 # rm(list=ls())  # Clear all namespaces in the current environment
