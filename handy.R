@@ -95,6 +95,7 @@ gothub <- function(remote, flname=sub('^.*/([^/]*)$', '\\1', remote), open=T) {
 # c(foo, bar) %>% {foo + bar}  # multi arguments, single statement
 # c(foo, bar) %>% {x <- foo + bar; x * x}  # multi arguments, multi statements
 
+# Misc
 # 10 %% 7  # Modulo
 # 10 %/% 7  # Integer division
 # x %*% y  # Matrix multiplication
