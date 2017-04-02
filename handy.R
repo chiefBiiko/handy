@@ -37,6 +37,7 @@
 # file.copy('moon.txt','moon/moon.txt')  # Copy a file
 # file.exists('moon/moon.txt')  # Check if a file exists
 # file.info('moon/moon.txt')  # Look at meta info of a file
+# file.size('moon/moon.txt')  # Get the size of a file in bytes
 # file.remove(c('moon.txt', 'moon/moon.txt'))  # Delete files
 # unlink('moon', recursive=T)  # Delete a directory
 # dir.exists('moon')  # Check if a directory exists
