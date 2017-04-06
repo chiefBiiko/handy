@@ -50,23 +50,6 @@ inBando <- function(bando=NULL) {
   return(grepl(paste0(bando, '$'), getwd(), ignore.case=T))
 }
 
-# Destructuring, unpacking magic: g(a, b, c) %=% c(77, 99, 36)
-'%=%' <- function(l, r) UseMethod('%=%')  # Generic form
-g <- function(...) structure(as.list(substitute(list(...))), class='lbunch')  # Caster
-'%=%.lbunch' <- function(l, r) {  # Destructuring operator
-  # Destructures items of the right operand with the namespaces provided on the left.
-  stopifnot(length(l) > 1)
-  if (length(r) > length(l) - 1) {
-    warning('Right has more args than left. Only first ', length(l) - 1, ' used.')
-  } else if (length(l) - 1 > length(r)) {
-    warning('Left has more args than right. Right will be repeated.')
-    r <- rep(r, ceiling((length(l) - 1) / length(r)))[1:(length(l) - 1)]
-  }
-  for (item in 2:length(l)) {  # g() value is first, counts as 1 length, ignoring it
-    assign(as.character(l[[item]]), as.list(r)[[item - 1]], pos=1L)
-  }
-}
-
 gothub <- function(remote, flname=sub('^.*/([^/]*)$', '\\1', remote), open=T) {
   # Download and open a .R or .Rmd file from a Github repo with 1 R function call!
   # Let below be all valid inputs [@param remote]
@@ -100,3 +83,21 @@ gothub <- function(remote, flname=sub('^.*/([^/]*)$', '\\1', remote), open=T) {
 # 10 %% 7  # Modulo
 # 10 %/% 7  # Integer division
 # x %*% y  # Matrix multiplication
+
+# WARNING BELOW IS NOT WELL TESTED!
+# Destructuring, unpacking magic: g(a, b, c) %=% c(77, 99, 36)
+'%=%' <- function(l, r) UseMethod('%=%')  # Generic form
+g <- function(...) structure(as.list(substitute(list(...))), class='lbunch')  # Caster
+'%=%.lbunch' <- function(l, r) {  # Destructuring operator
+  # Destructures items of the right operand with the namespaces provided on the left.
+  stopifnot(length(l) > 1)
+  if (length(r) > length(l) - 1) {
+    warning('Right has more args than left. Only first ', length(l) - 1, ' used.')
+  } else if (length(l) - 1 > length(r)) {
+    warning('Left has more args than right. Right will be repeated.')
+    r <- rep(r, ceiling((length(l) - 1) / length(r)))[1:(length(l) - 1)]
+  }
+  for (item in 2:length(l)) {  # g() value is first, counts as 1 length, ignoring it
+    assign(as.character(l[[item]]), as.list(r)[[item - 1]], pos=1L)
+  }
+}
