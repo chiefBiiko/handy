@@ -15,12 +15,18 @@
 # ls(getNamespace('sys'), all.names=T)  # Have a look at all namespaces in a package
 # ls()  # Get all namespaces in the current environment
 # ls(envir=globalenv())  # Get all namespaces in a specified environment
+# ls(envir=sys.frame(0)) 
 # rm(list=ls())  # Clear all namespaces in the current environment
 
-# args(readline)  # Get the argument list of a function
+# args(readline)  # Get the arguments of a function
 # formals(readline)  # same thing just ugly
 # body(source)  # Have a look at a function's body
 # environment(source)  # Get the parent environment of a function
+
+# as.list(match.call())  # Get the argument list of the current function
+# sys.nframe()  # Get the current position in the call stack
+# list names in a specific frame on the call stack
+# (function() (function() {z <- 7L; ls(envir=sys.frame(2))})())()
 
 # readLines(con)  # Read lines of text from a connection
 # readline('Continue? [y/n]')  # Get user input from the console
