@@ -13,6 +13,7 @@
 # .packages(all.available=T)  # Have a look at all available packages
 
 # ls(getNamespace('sys'), all.names=T)  # Have a look at all namespaces in a package
+# getNamespaceExports('sys')  # Get all exported namespaces from a package
 # ls()  # Get all namespaces in the current environment
 # ls(envir=globalenv())  # Get all namespaces in a specified environment
 # ls(envir=sys.frame(0)) 
